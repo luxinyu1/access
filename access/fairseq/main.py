@@ -112,6 +112,7 @@ def fairseq_train_and_evaluate(dataset, metrics_coefs=[1, 1, 1], parametrization
     kwargs = check_and_resolve_args(kwargs)
     exp_dir = prepare_exp_dir()
     preprocessors_kwargs = kwargs.get('preprocessors_kwargs', {})
+    # 返回用到的preprocessors
     preprocessors = get_preprocessors(preprocessors_kwargs)
     if len(preprocessors) > 0:
         dataset = create_preprocessed_dataset(dataset, preprocessors, n_jobs=1)

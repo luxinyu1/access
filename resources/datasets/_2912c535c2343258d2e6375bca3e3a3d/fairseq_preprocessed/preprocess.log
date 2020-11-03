@@ -1,0 +1,14 @@
+Namespace(align_suffix=None, alignfile=None, all_gather_list_size=16384, bf16=False, bpe=None, cpu=False, criterion='cross_entropy', dataset_impl='mmap', destdir='/mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/fairseq_preprocessed', empty_cache_freq=0, fp16=False, fp16_init_scale=128, fp16_no_flatten_grads=False, fp16_scale_tolerance=0.0, fp16_scale_window=None, joined_dictionary=False, log_format=None, log_interval=100, lr_scheduler='fixed', memory_efficient_bf16=False, memory_efficient_fp16=False, min_loss_scale=0.0001, model_parallel_size=1, no_progress_bar=False, nwordssrc=-1, nwordstgt=-1, only_source=False, optimizer=None, padding_factor=8, profile=False, quantization_config_path=None, scoring='bleu', seed=1, source_lang='complex', srcdict=None, target_lang='simple', task='translation', tensorboard_logdir=None, testpref='/mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.test', tgtdict=None, threshold_loss_scale=None, thresholdsrc=0, thresholdtgt=0, tokenizer=None, tpu=False, trainpref='/mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.train', user_dir=None, validpref='/mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.valid', workers=1)
+[complex] Dictionary: 10176 types
+[complex] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.train.complex: 296402 sents, 11586925 tokens, 0.0% replaced by <unk>
+[complex] Dictionary: 10176 types
+[complex] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.valid.complex: 992 sents, 38746 tokens, 0.0% replaced by <unk>
+[complex] Dictionary: 10176 types
+[complex] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.test.complex: 359 sents, 12673 tokens, 0.0% replaced by <unk>
+[simple] Dictionary: 10048 types
+[simple] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.train.simple: 296402 sents, 7597878 tokens, 0.0% replaced by <unk>
+[simple] Dictionary: 10048 types
+[simple] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.valid.simple: 992 sents, 25483 tokens, 0.0% replaced by <unk>
+[simple] Dictionary: 10048 types
+[simple] /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/_2912c535c2343258d2e6375bca3e3a3d.test.simple: 359 sents, 10579 tokens, 0.0% replaced by <unk>
+Wrote preprocessed data to /mnt/e/项目/access/resources/datasets/_2912c535c2343258d2e6375bca3e3a3d/fairseq_preprocessed

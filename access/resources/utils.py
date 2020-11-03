@@ -47,16 +47,23 @@ def download(url, destination_path):
 
 
 def download_and_extract(url):
+    # 创建缓存目录
     tmp_dir = Path(tempfile.mkdtemp())
+    # 解析压缩文件名
     compressed_filename = url.split('/')[-1]
+    # 得到完整压缩文件路径
     compressed_filepath = tmp_dir / compressed_filename
+    # 下载到缓存目录
+    # 注释此行
     download(url, compressed_filepath)
     print('Extracting...')
+    # 直接将compressed_filepath逐个替换为压缩文件地址
     return extract(compressed_filepath, tmp_dir)
 
 
 def extract(filepath, output_dir):
     # Infer extract method based on extension
+    # 通过不同的文件后缀选择解压方式
     extensions_to_methods = {
         '.tar.gz': untar,
         '.tar.bz2': untar,
@@ -65,38 +72,48 @@ def extract(filepath, output_dir):
         '.gz': ungzip,
         '.bz2': unbz2,
     }
-
+    # 根据文件后缀名找符合条件的插件
     def get_extension(filename, extensions):
         possible_extensions = [ext for ext in extensions if filename.endswith(ext)]
         if len(possible_extensions) == 0:
             raise Exception(f'File {filename} has an unknown extension')
         # Take the longest (.tar.gz should take precedence over .gz)
         return max(possible_extensions, key=lambda ext: len(ext))
-
     filename = os.path.basename(filepath)
     extension = get_extension(filename, list(extensions_to_methods))
     extract_method = extensions_to_methods[extension]
 
     # Extract files in a temporary dir then move the extracted item back to
     # the ouput dir in order to get the details of what was extracted
+
+    # 新建解压文件tmp文件目录tmp_extract_dir
     tmp_extract_dir = tempfile.mkdtemp()
     # Extract
+    # 用对应的方法解压
     extract_method(filepath, output_dir=tmp_extract_dir)
+    # 列出解压tmp目录下的所有文件
     extracted_items = os.listdir(tmp_extract_dir)
     output_paths = []
+    # 对每一个文件
     for name in extracted_items:
+        # 找出解压路径
         extracted_path = os.path.join(tmp_extract_dir, name)
+        # 生成输出路径
         output_path = os.path.join(output_dir, name)
+        # 强制复制
         move_with_overwrite(extracted_path, output_path)
+        # 生成输出路径list
         output_paths.append(output_path)
     return output_paths
 
 
 def move_with_overwrite(source_path, target_path):
+    # 先删光
     if os.path.isfile(target_path):
         os.remove(target_path)
     if os.path.isdir(target_path) and os.path.isdir(source_path):
         shutil.rmtree(target_path)
+    # 再复制
     shutil.move(source_path, target_path)
 
 

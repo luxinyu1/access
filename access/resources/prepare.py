@@ -26,17 +26,27 @@ def prepare_wikilarge():
     dataset = 'wikilarge'
     with create_directory_or_skip(get_dataset_dir(dataset)):
         url = 'https://github.com/louismartin/dress-data/raw/master/data-simplification.tar.bz2'
+        # 解压缩得到所有解压缩文件的缓存路径
         extracted_path = download_and_extract(url)[0]
         # Only rename files and put them in local directory architecture
+        # 对训练集测试集验证集循环
         for phase in PHASES:
+            # 把所有src替换为complex，所有dst替换为simple
             for (old_language_name, new_language_name) in [('src', 'complex'), ('dst', 'simple')]:
+                # 搜索到缓存目录下符合{*.ori.{phase}.{old_language_name}}的文件
+                # 例如wiki.full.aner.ori.test.dst
                 old_path_glob = os.path.join(extracted_path, dataset, f'*.ori.{phase}.{old_language_name}')
                 globs = glob(old_path_glob)
                 assert len(globs) == 1
+                # 记录old_path
                 old_path = globs[0]
+                # 生成new_path
                 new_path = get_data_filepath(dataset, phase, new_language_name)
+                # 复制该文件至new_path
                 shutil.copyfile(old_path, new_path)
+                # 替换原有的--lrb--/--rrb--标签
                 shutil.move(replace_lrb_rrb_file(new_path), new_path)
+                # 在末尾添加新的一行
                 add_newline_at_end_of_file(new_path)
     return dataset
 

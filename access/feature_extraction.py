@@ -17,6 +17,7 @@ from access.utils.helpers import yield_lines
 
 
 @lru_cache(maxsize=1)
+# 通过fasttext获得词的rank
 def get_word2rank(vocab_size=np.inf):
     prepare_fasttext_embeddings()
     # TODO: Decrease vocab size or load from smaller file
@@ -30,11 +31,11 @@ def get_word2rank(vocab_size=np.inf):
         word2rank[word] = i
     return word2rank
 
-
+# 词频特征
 def get_rank(word):
     return get_word2rank().get(word, len(get_word2rank()))
 
-
+# 给词的排名取个对数
 def get_log_rank(word):
     return np.log(1 + get_rank(word))
 
@@ -50,7 +51,7 @@ def get_lexical_complexity_score(sentence):
 def get_levenshtein_similarity(complex_sentence, simple_sentence):
     return Levenshtein.ratio(complex_sentence, simple_sentence)
 
-
+# maximum depth of the dependency tree of the source divided by that of the target
 def get_dependency_tree_depth(sentence):
     def get_subtree_depth(node):
         if len(list(node.children)) == 0:

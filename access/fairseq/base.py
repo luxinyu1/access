@@ -33,6 +33,7 @@ def get_fairseq_exp_dir(job_id=None):
 def fairseq_preprocess(dataset):
     dataset_dir = get_dataset_dir(dataset)
     with lock_directory(dataset_dir):
+        # 在原dataset目录下新建'fairseq_preprocessed'存放二进制化的preprocess数据
         preprocessed_dir = dataset_dir / 'fairseq_preprocessed'
         with create_directory_or_skip(preprocessed_dir):
             preprocessing_parser = options.get_preprocessing_parser()
@@ -49,8 +50,6 @@ def fairseq_preprocess(dataset):
                 os.path.join(dataset_dir, f'{dataset}.test'),
                 '--destdir',
                 str(preprocessed_dir),
-                '--output-format',
-                'raw',
             ])
             preprocess.main(preprocess_args)
         return preprocessed_dir
@@ -96,7 +95,6 @@ def fairseq_train(
             '--task',
             'translation',
             preprocessed_dir,
-            '--raw-text',
             '--source-lang',
             'complex',
             '--target-lang',
